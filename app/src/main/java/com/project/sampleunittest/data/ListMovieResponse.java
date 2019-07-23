@@ -3,7 +3,7 @@ package com.project.sampleunittest.data;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
-public class ListMovieResponse {
+public class ListMovieResponse extends BaseResponse{
     @SerializedName("page")
     private int page;
 

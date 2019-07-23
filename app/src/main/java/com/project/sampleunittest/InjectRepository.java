@@ -9,6 +9,10 @@ import com.project.sampleunittest.network.MovieDBService;
 import com.project.sampleunittest.data.MovieRepository;
 import io.reactivex.annotations.NonNull;
 
+/**
+ * This is useful for testing, since it allows us to use
+ *  a fake instance of the class to isolate the dependencies and run a test hermetically.
+ */
 public class InjectRepository {
     @SuppressLint("RestrictedApi")
     public static MovieRepository provideRepository(@NonNull Context context) {

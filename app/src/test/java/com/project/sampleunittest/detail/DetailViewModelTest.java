@@ -55,7 +55,8 @@ public class DetailViewModelTest {
         Mockito.verify(loadDataStatus).postValue(true);
         Mockito.verify(loadDataStatus).postValue(false);
         Mockito.verify(mDetailViewModel).setMovie(movieResponse);
-        Mockito.verify(mEventBus, times(0)).post(status);
+        Mockito.verifyZeroInteractions(mEventBus);
+//        Mockito.verify(mEventBus, times(0)).post(status);
     }
 
     @Test

@@ -1,10 +1,12 @@
 package com.project.sampleunittest.main;
 
 import android.arch.lifecycle.MutableLiveData;
+import com.project.sampleunittest.data.BaseResponse;
 import com.project.sampleunittest.data.BaseViewModel;
 import com.project.sampleunittest.data.FetchDataStatus;
 import com.project.sampleunittest.data.MovieRepository;
 import com.project.sampleunittest.data.MovieResponse;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,19 +36,27 @@ public class MainViewModel extends BaseViewModel {
         return mList;
     }
 
-    public void getListPopular(){
+    public void setMovieRepository(final MovieRepository movieRepository) {
+        mMovieRepository = movieRepository;
+    }
+
+    public void setList(final List<MovieResponse> list) {
+        mList = list;
+    }
+
+    public void getListPopular() {
         subscribe(mMovieRepository.getListPopular()
                 .subscribeOn(Schedulers.newThread())
                 .doOnSubscribe(disposable -> getLoadDataStatus().postValue(true))
                 .doAfterTerminate(() -> getLoadDataStatus().postValue(false))
                 .subscribe(response -> {
-                    if (response != null) {
+                    if (response.getStatus_code() == BaseResponse.STATUS_CODE_SUCCESS) {
                         EventBus.getDefault().post(new FetchDataStatus(GET_LIST_POPULAR_DONE));
                         mList.addAll(response.getListMovie());
                     } else {
                         EventBus.getDefault().post(new FetchDataStatus(GET_LIST_POPULAR_FAILURE));
                     }
-                }, Throwable::printStackTrace));
+                }, throwable -> handleError(throwable)));
     }
 
 

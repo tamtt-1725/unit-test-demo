@@ -29,6 +29,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         mResponseList = responseList;
     }
 
+    public void setResponseList(final List<MovieResponse> responseList) {
+        mResponseList = responseList;
+    }
+
     public void setListener(final ShowMovieDetailListener listener) {
         this.listener = listener;
     }

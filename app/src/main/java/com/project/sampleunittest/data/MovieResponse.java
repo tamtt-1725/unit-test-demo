@@ -3,9 +3,7 @@ package com.project.sampleunittest.data;
 import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
-public class MovieResponse {
-
-    public static final int STATUS_CODE_SUCCESS = 200;
+public class MovieResponse extends BaseResponse{
 
     @SerializedName("poster_path")
     private String poster_path;
@@ -25,30 +23,6 @@ public class MovieResponse {
     @SerializedName("release_date")
     private String release_date;
 
-    @SerializedName("status_code")
-    private int status_code;
-
-    @SerializedName("status_message")
-    private String status_message;
-
-    public int getStatus_code() {
-        if(status_code != STATUS_CODE_SUCCESS){
-            return status_code;
-        }
-        return status_code;
-    }
-
-    public void setStatus_code(int status_code) {
-        this.status_code = status_code;
-    }
-
-    public String getStatus_message() {
-        return status_message;
-    }
-
-    public void setStatus_message(final String status_message) {
-        this.status_message = status_message;
-    }
 
     public String getPoster_path() {
         return poster_path;
@@ -110,7 +84,7 @@ public class MovieResponse {
         if (getStatus_code() == STATUS_CODE_SUCCESS) {
             return id == that.id;
         } else {
-            return status_code == that.status_code;
+            return getStatus_code() == that.getStatus_code();
         }
 
     }
