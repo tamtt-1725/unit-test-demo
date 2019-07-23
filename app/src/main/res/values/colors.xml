@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="color_tolopea_primary">#141a32</color>
+    <color name="color_black_russian_primary_dark">#000a12</color>
+    <color name="color_jacarta_accent">#1e2748</color>
+    <color name="color_orange_peel_star">#ff9800</color>
+    <color name="color_white_text">#ffffff</color>
+    <color name="semiTransparentWhite">#40FFFFFF</color>
+    <color name="color_item">#1e2748</color>
+    <color name="color_cyan">#00E5FF</color>
+    <color name="color_electric_violet">#6200EA</color>
+    <color name="color_denim">#1976D2</color>
+</resources>

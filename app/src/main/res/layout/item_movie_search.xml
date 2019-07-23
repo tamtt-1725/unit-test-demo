@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="movie"
+            type="com.project.sampleunittest.data.MovieResponse" />
+
+        <variable
+            name="listener"
+            type="com.project.sampleunittest.main.MovieAdapter.ShowMovieDetailListener" />
+    </data>
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_genre_height"
+        android:layout_margin="@dimen/dp_8"
+        android:onClick="@{() -> listener.showDetail(movie)}"
+        app:cardBackgroundColor="@color/color_tolopea_primary">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/magin_top_item_infor"
+            android:background="@color/color_item">
+
+            <TextView
+                android:id="@+id/text_item_movie_title_search"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/text_item_movie_title_search"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_8"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{movie.getOriginal_title()}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/color_white_text"
+                android:textSize="@dimen/text_item_genre_movie_name"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/rating_item_movie_search"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RatingBar
+                android:id="@+id/rating_item_movie_search"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/rating_search_item"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:layout_marginStart="@dimen/magin_start_start"
+                android:layout_marginTop="@dimen/dp_4"
+                android:numStars="5"
+                android:progressTint="@color/color_orange_peel_star"
+                android:rating="@{movie.getVote_average()}"
+                android:scaleX=".9"
+                android:scaleY=".9"
+                android:secondaryProgressTint="@color/color_white_text"
+                android:stepSize="0.1"
+                android:transformPivotX="@dimen/item_movie_rating_bar_transform_pivot_x"
+                android:transformPivotY="@dimen/item_movie_rating_bar_transform_pivot_y"
+                app:layout_constraintBottom_toTopOf="@+id/text_overview_search"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_item_movie_title_search" />
+
+            <TextView
+                android:id="@+id/text_overview_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:paddingBottom="@dimen/dp_4"
+                android:text="@{movie.getOverview()}"
+                android:textColor="@color/color_white_text"
+                android:textSize="@dimen/text_overview_genre"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/rating_item_movie_search" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/image_item_movie_poster"
+            android:layout_width="@dimen/item_genre_image_width"
+            android:layout_height="@dimen/image_height_item_genre"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_8"
+            android:scaleType="centerCrop"
+            app:loadImageUser="@{ movie }"
+            app:srcCompat="@mipmap/ic_launcher_round" />
+
+    </android.support.v7.widget.CardView>
+</layout>
