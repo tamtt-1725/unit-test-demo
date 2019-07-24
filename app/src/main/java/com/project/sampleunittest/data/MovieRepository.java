@@ -23,6 +23,7 @@ public class MovieRepository extends BaseRepository {
     public Single<ListMovieResponse> getListPopular(){
         return service.getListPopular(API_KEY);
     }
+
     public Single<MovieResponse> getDetail(int id){
         return service.getDetail(id, API_KEY);
     }
