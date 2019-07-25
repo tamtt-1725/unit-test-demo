@@ -1,6 +1,7 @@
 package com.project.sampleunittest.detail;
 
 import static com.project.sampleunittest.detail.DetailViewModel.GET_DETAIL_MOVIE_FAILURE;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
@@ -9,7 +10,12 @@ import android.arch.lifecycle.MutableLiveData;
 import com.project.sampleunittest.data.FetchDataStatus;
 import com.project.sampleunittest.data.MovieRepository;
 import com.project.sampleunittest.data.MovieResponse;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
+import io.reactivex.android.plugins.RxAndroidPlugins;
+import io.reactivex.internal.schedulers.ExecutorScheduler;
+import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.schedulers.Schedulers;
 import org.greenrobot.eventbus.EventBus;
 import org.junit.*;
 import org.junit.runner.*;
@@ -32,6 +38,28 @@ public class DetailViewModelTest {
 
     @Spy
     private DetailViewModel mDetailViewModel = new DetailViewModel(mMovieRepository);
+
+    @BeforeClass
+    public static void setUpClass() {
+        Scheduler immediate = new Scheduler() {
+            @Override
+            public Worker createWorker() {
+                return new ExecutorScheduler.ExecutorWorker(Runnable::run, false);
+            }
+        };
+
+        RxJavaPlugins.setInitIoSchedulerHandler(scheduler -> immediate);
+        RxJavaPlugins.setInitComputationSchedulerHandler(scheduler -> immediate);
+        RxJavaPlugins.setInitNewThreadSchedulerHandler(scheduler -> immediate);
+        RxJavaPlugins.setInitSingleSchedulerHandler(scheduler -> immediate);
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler(scheduler -> immediate);
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+        RxJavaPlugins.reset();
+        RxAndroidPlugins.reset();
+    }
 
     @Before
     public void setUp() throws Exception {

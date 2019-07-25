@@ -20,11 +20,15 @@ public class MovieRepository extends BaseRepository {
         super(service);
     }
 
-    public Single<ListMovieResponse> getListPopular(){
+    public Single<ListMovieResponse> getListPopular() {
         return service.getListPopular(API_KEY);
     }
 
-    public Single<MovieResponse> getDetail(int id){
+    public Single<MovieResponse> getDetail(int id) {
         return service.getDetail(id, API_KEY);
+    }
+
+    public int cong(int a, int b) {
+        return a + b;
     }
 }
